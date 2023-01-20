@@ -8,6 +8,7 @@
 #include <std_srvs/SetBool.h>
 #include <cv_bridge/cv_bridge.h>
 #include <zivid_camera/LoadSettingsFromFile.h>
+#include <ros/package.h>
 
 #include <ros/ros.h>
 
@@ -68,7 +69,7 @@ bool callback_zivid_pub_img(std_srvs::SetBool::Request  &req, std_srvs::SetBool:
   if(req.data)
   {
     zivid_camera::LoadSettingsFromFile file;
-    file.request.file_path = "/home/nuk1/catkin_ws/src/zivid-ros/zivid_samples/test.yml";
+    file.request.file_path = ros::package::getPath("zivid_samples") + "/test10sec.yml";;
     if (load_settings_.call(file)) ROS_INFO("Loading image settings");
     else ROS_ERROR("Failed to call service load_settings_from_file");  
     capture();
